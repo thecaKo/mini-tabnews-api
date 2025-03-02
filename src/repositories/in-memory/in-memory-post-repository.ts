@@ -77,4 +77,34 @@ export class InMemoryPostRepository implements PostRepository {
 
     return null;
   }
+
+  async findById(postId: string): Promise<Post | null> {
+    const index = this.items.findIndex((post) => post.id === postId);
+
+    if (index === -1) {
+      return null;
+    }
+
+    return this.items[index];
+  }
+
+  async fetchManyByUserId(userId: string): Promise<Post[] | null> {
+    const posts = this.items.filter((item) => item.owner_id === userId);
+
+    if (posts.length === 0) {
+      return null;
+    }
+
+    return posts;
+  }
+
+  async fetchPostId(postId: string): Promise<Post | null> {
+    const posts = this.items.filter((item) => item.id === postId);
+
+    if (posts.length === 0) {
+      return null;
+    }
+
+    return posts[0];
+  }
 }
