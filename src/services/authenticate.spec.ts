@@ -1,7 +1,6 @@
 import { InMemoryUsersRepository } from "../repositories/in-memory/in-memory-users-repository";
-import { UserAlredyExistError } from "./errors/user-alredy-exists-error";
 import { it, expect, describe, beforeEach } from "vitest";
-import { compare, hash } from "bcryptjs";
+import { hash } from "bcryptjs";
 import { AuthenticateService } from "./authenticate";
 import { InvalidCredentialsError } from "./errors/invalid-credentials-error";
 
