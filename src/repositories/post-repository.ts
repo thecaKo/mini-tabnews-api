@@ -6,5 +6,4 @@ export interface PostRepository {
   delete(postId: string): Promise<null>;
   findById(postId: string): Promise<Post | null>;
   fetchManyByUserId(userId: string): Promise<Post[] | null>;
-  fetchPostId(postId: string): Promise<Post | null>;
 }

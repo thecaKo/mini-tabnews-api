@@ -17,7 +17,7 @@ export class UpdatePostService {
   constructor(private postRepository: PostRepository) {}
 
   async execute({ postId, title, content }: UpdatePostServiceRequest): Promise<UpdatePostServiceResponse> {
-    const post = await this.postRepository.fetchPostId(postId);
+    const post = await this.postRepository.findById(postId);
 
     if (!post) {
       throw new ResourceNotFoundError();

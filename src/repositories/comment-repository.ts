@@ -6,5 +6,4 @@ export interface CommentRepository {
   delete(commentId: string): Promise<null>;
   findById(commentId: string): Promise<Comment | null>;
   fetchManyByUserId(userId: string): Promise<Comment[] | null>;
-  fetchCommentId(commentId: string): Promise<Comment>;
 }

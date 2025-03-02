@@ -68,10 +68,4 @@ export class InMemoryCommentRepository implements CommentRepository {
 
     return comment;
   }
-
-  async fetchCommentId(commentId: string): Promise<Comment> {
-    const comment = this.items.filter((item) => item.id === commentId);
-
-    return comment[0];
-  }
 }

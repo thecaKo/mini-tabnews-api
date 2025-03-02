@@ -83,14 +83,4 @@ export class InMemoryPostRepository implements PostRepository {
 
     return posts;
   }
-
-  async fetchPostId(postId: string): Promise<Post | null> {
-    const posts = this.items.filter((item) => item.id === postId);
-
-    if (posts.length === 0) {
-      return null;
-    }
-
-    return posts[0];
-  }
 }
