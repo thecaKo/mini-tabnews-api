@@ -6,7 +6,7 @@ import { InMemoryPostRepository } from "@/repositories/in-memory/in-memory-post-
 let postsRepository: PostRepository;
 let sut: FetchPostsByUserId;
 
-describe("Fetch Nearby Gyms Use Case", () => {
+describe("Fetch Posts By User Id Use Case", () => {
   beforeEach(async () => {
     postsRepository = new InMemoryPostRepository();
     sut = new FetchPostsByUserId(postsRepository);
