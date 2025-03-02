@@ -1,17 +1,7 @@
 import { Prisma, Post } from "@prisma/client";
 import { PostRepository } from "../post-repository";
 import { randomUUID } from "crypto";
-
-function generateSlug(title: string) {
-  return title
-    .toLowerCase()
-    .trim()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-");
-}
+import { generateSlug } from "@/services/utils/generate-slug";
 
 export class InMemoryPostRepository implements PostRepository {
   public items: Post[] = [];
@@ -43,12 +33,8 @@ export class InMemoryPostRepository implements PostRepository {
 
     return removedPost;
   }
-  async update(data: Prisma.PostUncheckedCreateInput): Promise<Post | null> {
+  async update(data: Prisma.PostUncheckedCreateInput): Promise<Post> {
     const index = this.items.findIndex((post) => post.id === data.id);
-
-    if (index === -1) {
-      return null;
-    }
 
     const updatePost: Post = {
       id: randomUUID(),
