@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start:dev": "tsx watch src/server.ts",
-    "test:unit": "vitest --dir src/services"
+    "test:unit": "vitest --dir src/services",
+    "test:e2e": "vitest run --dir src/http"
   },
   "keywords": [],
   "author": "",
