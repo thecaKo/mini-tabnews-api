@@ -21,7 +21,7 @@ enum Role {
 model User {
   id            String    @id @default(uuid())
   email         String    @unique
-  name          String
+  name          String    @unique
   password_hash String
   register_at   DateTime  @default(now())
   role          Role      @default(MEMBER)
@@ -41,9 +41,9 @@ model Post {
   created_at DateTime @default(now())
   update_at  DateTime @default(now())
 
-  user    User      @relation(fields: [owner_id], references: [id])
-  owner_id  String
-  Comment Comment[]
+  user     User      @relation(fields: [owner_id], references: [id])
+  owner_id String
+  Comment  Comment[]
 
   @@map("post")
 }
@@ -58,7 +58,7 @@ model Comment {
   post   Post   @relation(fields: [postId], references: [id])
   postId String
 
-  user   User   @relation(fields: [owner_id], references: [id])
+  user     User   @relation(fields: [owner_id], references: [id])
   owner_id String
 
   @@map("comments")
