@@ -33,8 +33,8 @@ export class InMemoryPostRepository implements PostRepository {
 
     return removedPost;
   }
-  async update(data: Prisma.PostUncheckedCreateInput): Promise<Post> {
-    const index = this.items.findIndex((post) => post.id === data.id);
+  async update(postId: string, data: Prisma.PostUncheckedCreateInput): Promise<Post> {
+    const index = this.items.findIndex((post) => post.id === postId);
 
     const updatePost: Post = {
       id: randomUUID(),

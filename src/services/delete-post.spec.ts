@@ -19,7 +19,7 @@ describe("Delete Post Service Test", async () => {
       content: "content.example",
     });
 
-    await sut.execute({ postId: id });
+    await sut.execute({ postId: id, userId: "user-01" });
 
     await expect(postRepository.findById(id)).resolves.toBeNull();
   });

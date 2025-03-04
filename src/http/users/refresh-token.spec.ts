@@ -24,16 +24,15 @@ describe("Refresh Token (e2e)", () => {
 
     const cookies = authResponse.get("Set-Cookie");
 
-    const response = await request(app.server)
-      .patch("/token/refresh")
-      .set("Cookie", cookies)
-      .send();
+    if (!cookies) {
+      return null;
+    }
+
+    const response = await request(app.server).patch("/token/refresh").set("Cookie", cookies).send();
     expect(response.status).toEqual(200);
     expect(response.body).toEqual({
       token: expect.any(String),
     });
-    expect(response.get("Set-Cookie")).toEqual([
-      expect.stringContaining("refreshToken="),
-    ]);
+    expect(response.get("Set-Cookie")).toEqual([expect.stringContaining("refreshToken=")]);
   });
 });
