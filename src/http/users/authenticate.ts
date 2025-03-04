@@ -21,7 +21,7 @@ export async function authenticate(request: FastifyRequest, reply: FastifyReply)
       { role: user.role },
       {
         sign: {
-          sub: user.id,
+          sub: user.name,
         },
       },
     );
@@ -30,7 +30,7 @@ export async function authenticate(request: FastifyRequest, reply: FastifyReply)
       { role: user.role },
       {
         sign: {
-          sub: user.id,
+          sub: user.name,
           expiresIn: "7d",
         },
       },
