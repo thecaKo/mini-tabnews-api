@@ -27,10 +27,7 @@ describe("Authenticate (e2e)", () => {
 
     const { token } = authResponse.body;
 
-    const profileResponse = await request(app.server)
-      .get("/me")
-      .set("Authorization", `Bearer ${token}`)
-      .send();
+    const profileResponse = await request(app.server).get("/me").set("Authorization", `Bearer ${token}`).send();
 
     expect(profileResponse.statusCode).toEqual(200);
     expect(profileResponse.body.user.user).toEqual(
@@ -39,4 +36,4 @@ describe("Authenticate (e2e)", () => {
       }),
     );
   });
-})
+});

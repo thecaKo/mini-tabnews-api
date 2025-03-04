@@ -1,6 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 
-
 export async function refresh(request: FastifyRequest, reply: FastifyReply) {
   await request.jwtVerify({ onlyCookie: true });
 
@@ -30,6 +29,7 @@ export async function refresh(request: FastifyRequest, reply: FastifyReply) {
       secure: true,
       sameSite: true,
       httpOnly: true,
-    }).status(200).send({ token })
+    })
+    .status(200)
+    .send({ token });
 }
-
