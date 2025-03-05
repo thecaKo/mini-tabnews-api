@@ -3,10 +3,8 @@ import request from "supertest";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { teardownTestDatabase, startTestEnvironment } from "@/../prisma/vitest-environment-prisma/setup";
 import jwt from "jsonwebtoken";
-import { object } from "zod";
-import { Unauthorized } from "@/services/errors/unauthorized-error";
 
-describe("Create post(e2e)", () => {
+describe("Delete post(e2e)", () => {
   beforeAll(async () => {
     await app.ready();
     await startTestEnvironment();
@@ -54,7 +52,7 @@ describe("Create post(e2e)", () => {
       password: "123456",
     });
 
-    const secondUserResponse = await request(app.server).post("/users").send({
+    await request(app.server).post("/users").send({
       name: "cako456",
       email: "cako456@gmail.com",
       password: "123456",

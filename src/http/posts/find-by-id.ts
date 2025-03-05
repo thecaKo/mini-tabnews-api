@@ -15,5 +15,5 @@ export async function findById(request: FastifyRequest, reply: FastifyReply) {
 
   const { post } = await findByIdService.execute({ postId: id });
 
-  return post;
+  return reply.status(200).send({ post });
 }
