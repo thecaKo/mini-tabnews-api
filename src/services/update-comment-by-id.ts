@@ -28,7 +28,7 @@ export class UpdateCommentService {
       throw new Unauthorized();
     }
 
-    const updatedComment = await this.commentRepository.update({
+    const updatedComment = await this.commentRepository.update(commentId, {
       owner_id: ownerId,
       postId,
       content,

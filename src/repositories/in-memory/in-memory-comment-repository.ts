@@ -19,7 +19,7 @@ export class InMemoryCommentRepository implements CommentRepository {
 
     return comment;
   }
-  async update(data: Prisma.CommentUncheckedCreateInput): Promise<Comment> {
+  async update(commentId: string, data: Prisma.CommentUncheckedCreateInput): Promise<Comment> {
     const index = this.items.findIndex((comment) => comment.id === data.id);
 
     const comment: Comment = {

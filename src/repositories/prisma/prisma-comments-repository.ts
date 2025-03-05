@@ -11,12 +11,23 @@ export class PrismaCommentsRepository implements CommentRepository {
     return comment;
   }
 
-  async update(data: Prisma.CommentUncheckedCreateInput): Promise<Comment> {
-    const comment = await prisma.comment.findUnique({ where: { id: data.id } });
+  async update(commentId: string, data: Prisma.CommentUncheckedUpdateInput): Promise<Comment | null> {
+    const existingComment = await prisma.comment.findUnique({
+      where: {
+        id: commentId,
+      },
+    });
 
-    const updatedComment = await prisma.comment.update({ where: { id: comment?.id }, data });
+    if (!existingComment) {
+      return null;
+    }
 
-    return updatedComment;
+    const updatedComment = await prisma.comment.update({
+      where: { id: existingComment?.id },
+      data,
+    });
+
+    return { updatedComment };
   }
 
   async delete(commentId: string): Promise<null> {
@@ -27,6 +38,10 @@ export class PrismaCommentsRepository implements CommentRepository {
 
   async findById(commentId: string): Promise<Comment | null> {
     const comment = await prisma.comment.findUnique({ where: { id: commentId } });
+
+    if (!comment) {
+      return null;
+    }
 
     return comment;
   }
