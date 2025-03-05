@@ -1,6 +1,5 @@
 import { Comment } from "@prisma/client";
 import { ResourceNotFoundError } from "./errors/resource-not-found-error";
-import { Unauthorized } from "./errors/unauthorized-error";
 import { CommentRepository } from "@/repositories/comment-repository";
 
 interface FetchCommentsByOwnerIdServiceRequest {

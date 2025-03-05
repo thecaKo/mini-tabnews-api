@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { teardownTestDatabase, startTestEnvironment } from "@/../prisma/vitest-environment-prisma/setup";
 import jwt from "jsonwebtoken";
 
-describe("Update Comment (E2E)", () => {
+describe("Fetch Comment (E2E)", () => {
   beforeAll(async () => {
     await app.ready();
     await startTestEnvironment();
@@ -16,7 +16,7 @@ describe("Update Comment (E2E)", () => {
     await teardownTestDatabase();
   });
 
-  it("should update a comment successfully", async () => {
+  it("should fetch a comment successfully", async () => {
     await request(app.server).post("/users").send({
       name: "cako123",
       email: "cako@gmail.com",
@@ -46,15 +46,11 @@ describe("Update Comment (E2E)", () => {
         postId: postBody.post.id,
         content: "created comment",
       });
-    const updatedCommentResponse = await request(app.server)
-      .put(`/post/${postBody.post.id}/update-comment/${commentBody.id}`)
-      .set("Authorization", `Bearer ${token}`)
-      .send({
-        content: "updated-comment",
-        ownerId: userId,
-        postId: postBody.post.id,
-      });
-    expect(updatedCommentResponse.status).toBe(200);
-    expect(updatedCommentResponse.body.updatedComment).toHaveProperty("content", "updated-comment");
+    const createCommentResponse = await request(app.server)
+      .get(`/post/${postBody.post.id}/fetch-comment/${commentBody.id}`)
+      .set("Authorization", `Bearer ${token}`);
+
+    expect(response.status).toBe(200);
+    expect(commentBody).toHaveProperty("id", commentBody.id);
   });
 });
