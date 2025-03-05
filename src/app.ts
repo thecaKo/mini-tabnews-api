@@ -4,6 +4,7 @@ import fastifyJwt from "@fastify/jwt";
 import { env } from "./env";
 import fastifyCookie from "@fastify/cookie";
 import { postsRoutes } from "./http/posts/routes";
+import { commentsRoutes } from "./http/comments/routes";
 
 export const app = fastify();
 
@@ -22,3 +23,4 @@ app.register(fastifyCookie);
 
 app.register(usersRoutes);
 app.register(postsRoutes);
+app.register(commentsRoutes);

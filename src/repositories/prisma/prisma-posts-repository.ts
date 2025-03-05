@@ -30,7 +30,7 @@ export class PrismaPostRepository implements PostRepository {
   }
 
   async findById(postId: string): Promise<Post | null> {
-    const post = await prisma.post.findUnique({ where: { id: postId } });
+    const post = await prisma.post.findUnique({ where: { id: postId }, include: { Comment: true, user: true } });
 
     if (!post) {
       return null;
