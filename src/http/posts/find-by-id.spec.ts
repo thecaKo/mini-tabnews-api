@@ -15,7 +15,7 @@ describe("Create post(e2e)", () => {
     await teardownTestDatabase();
   });
 
-  it("should be able to create a post", async () => {
+  it("should be able to find a post by his id", async () => {
     await request(app.server).post("/users").send({
       name: "cako123",
       email: "cako@gmail.com",
@@ -31,16 +31,17 @@ describe("Create post(e2e)", () => {
     const decoded = jwt.decode(token);
     const userId = decoded?.sub;
 
-    const postResponse = await request(app.server).post("/post/create").set("Authorization", `Bearer ${token}`).send({
+    const { body: postBody } = await request(app.server).post("/post/create").set("Authorization", `Bearer ${token}`).send({
       title: "test-01",
       content: "test-test",
       owner_id: userId,
     });
 
-    expect(postResponse.statusCode).toBe(201);
-    expect(postResponse.body.post).toEqual(
+    const fetchedPost = await request(app.server).get(`/post/${postBody.post.id}`).set("Authorization", `Bearer ${token}`);
+
+    expect(fetchedPost.body).toEqual(
       expect.objectContaining({
-        owner_id: userId,
+        title: "test-01",
       }),
     );
   });
