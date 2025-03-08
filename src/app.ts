@@ -5,6 +5,7 @@ import { env } from "./env";
 import fastifyCookie from "@fastify/cookie";
 import { postsRoutes } from "./http/posts/routes";
 import { commentsRoutes } from "./http/comments/routes";
+import fastifyCors from "@fastify/cors";
 
 export const app = fastify();
 
@@ -17,6 +18,11 @@ app.register(fastifyJwt, {
   sign: {
     expiresIn: "10m",
   },
+});
+
+app.register(fastifyCors, {
+  origin: "http://localhost:3000",
+  credentials: true,
 });
 
 app.register(fastifyCookie);
