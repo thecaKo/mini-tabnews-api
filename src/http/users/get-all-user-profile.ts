@@ -2,7 +2,7 @@ import { PrismaUserRepository } from "@/repositories/prisma/prisma-users-reposit
 import { GetAllUsers } from "@/services/get-all-users";
 import { FastifyReply, FastifyRequest } from "fastify";
 
-export async function getAllUsers(request: FastifyRequest, reply: FastifyReply) {
+export async function getAllUsers(_request: FastifyRequest, reply: FastifyReply) {
   const prismaUsersRepository = new PrismaUserRepository();
   const getAllUsersService = new GetAllUsers(prismaUsersRepository);
 
