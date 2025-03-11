@@ -9,7 +9,9 @@ enum Role {
 
 export class InMemoryUsersRepository implements UsersRepository {
   public items: User[] = [];
-
+  async getAllUsers(): Promise<User[]> {
+    return this.items;
+  }
   async create(data: Prisma.UserCreateInput): Promise<User> {
     const user = {
       id: randomUUID(),
