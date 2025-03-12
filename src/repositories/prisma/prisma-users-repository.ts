@@ -8,11 +8,13 @@ export class PrismaUserRepository implements UsersRepository {
 
     return users;
   }
+
   async findById(id: string): Promise<User | null> {
     const user = await prisma.user.findUnique({
       where: {
         id,
       },
+      include: { Post: true, Comment: true },
     });
 
     return user;
@@ -32,7 +34,7 @@ export class PrismaUserRepository implements UsersRepository {
     return user;
   }
   async findByUsername(username: string): Promise<User | null> {
-    const user = await prisma.user.findFirst({ where: { name: username } });
+    const user = await prisma.user.findFirst({ where: { name: username }, include: { Comment: true, Post: true } });
 
     return user;
   }

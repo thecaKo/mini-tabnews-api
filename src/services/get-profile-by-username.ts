@@ -12,7 +12,7 @@ interface GetProfileServiceResponse {
   user: UserWithoutPassword;
 }
 
-export class GetProfileService {
+export class GetProfileByUserNameService {
   constructor(private userRepository: UsersRepository) {}
 
   async execute({ username }: GetProfileServiceRequest): Promise<GetProfileServiceResponse> {

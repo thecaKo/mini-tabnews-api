@@ -24,14 +24,16 @@ export async function authenticate(request: FastifyRequest, reply: FastifyReply)
     });
 
     const refreshToken = await reply.jwtSign(
-      { role: user.role },
       {
-        sign: {
-          sub: user.id,
-          expiresIn: "7d",
-        },
+        sub: user.id,
+        username: user.name,
+        role: user.role,
+      },
+      {
+        expiresIn: "7d",
       },
     );
+
     return reply
       .setCookie("refreshToken", refreshToken, {
         path: "/",

@@ -3,7 +3,7 @@ import { startTestEnvironment, teardownTestDatabase } from "prisma/vitest-enviro
 import request from "supertest";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
-describe("Authenticate (e2e)", () => {
+describe("Get Me (e2e)", () => {
   beforeAll(async () => {
     await app.ready();
     await startTestEnvironment();

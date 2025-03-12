@@ -1,14 +1,14 @@
 import { PrismaUserRepository } from "@/repositories/prisma/prisma-users-repository";
-import { GetProfileByUserNameService } from "@/services/get-profile-by-username";
+import { GetProfileByUserId } from "@/services/get-profile-by-user-id";
 import { FastifyReply, FastifyRequest } from "fastify";
 
-export async function getProfile(request: FastifyRequest, reply: FastifyReply) {
+export async function getProfileByUserId(request: FastifyRequest, reply: FastifyReply) {
   await request.jwtVerify();
 
   const prismaUsersRepository = new PrismaUserRepository();
-  const getProfileService = new GetProfileByUserNameService(prismaUsersRepository);
+  const getProfileByUserId = new GetProfileByUserId(prismaUsersRepository);
 
-  const user = await getProfileService.execute({ username: request.user.username });
+  const { user } = await getProfileByUserId.execute({ id: request.user.sub });
 
   return reply.status(200).send({
     user: {
