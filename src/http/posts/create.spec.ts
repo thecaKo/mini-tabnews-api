@@ -28,19 +28,16 @@ describe("Create post(e2e)", () => {
     });
 
     const { token } = response.body;
-    const decoded = jwt.decode(token);
-    const userId = decoded?.sub;
 
-    const postResponse = await request(app.server).post("/post/create").set("Authorization", `Bearer ${token}`).send({
+    const postResponse = await request(app.server).post("/post/create").set("Cookie", `refreshToken=${token}`).send({
       title: "test-01",
       content: "test-test",
-      owner_id: userId,
     });
 
     expect(postResponse.statusCode).toBe(201);
     expect(postResponse.body.post).toEqual(
       expect.objectContaining({
-        owner_id: userId,
+        owner_id: jwt.decode(token)?.sub,
       }),
     );
   });

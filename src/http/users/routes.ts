@@ -6,6 +6,7 @@ import { refresh } from "./refresh-token";
 import { getAllUsers } from "./get-all-user-profile";
 import { getProfileByUserId } from "./get-me-profile-by-user-id";
 import { getProfileStats } from "./get-profile-by-username";
+import { logout } from "./logout";
 
 export async function usersRoutes(app: FastifyInstance) {
   app.post("/users", register);
@@ -18,4 +19,6 @@ export async function usersRoutes(app: FastifyInstance) {
   app.get("/users", getAllUsers);
 
   app.get("/users/:user", getProfileStats);
+
+  app.post("/logout", logout);
 }

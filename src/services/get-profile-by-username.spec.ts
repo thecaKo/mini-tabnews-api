@@ -1,15 +1,15 @@
 import { InMemoryUsersRepository } from "../repositories/in-memory/in-memory-users-repository";
 import { it, expect, describe, beforeEach } from "vitest";
-import { GetProfileService } from "./get-profile";
+import { GetProfileByUserNameService } from "./get-profile-by-username";
 import { ResourceNotFoundError } from "./errors/resource-not-found-error";
 
 let userRepository: InMemoryUsersRepository;
-let sut: GetProfileService;
+let sut: GetProfileByUserNameService;
 
 describe("Get Profile Service Test", async () => {
   beforeEach(() => {
     userRepository = new InMemoryUsersRepository();
-    sut = new GetProfileService(userRepository);
+    sut = new GetProfileByUserNameService(userRepository);
   });
 
   it("should be able to fetch an user profile", async () => {

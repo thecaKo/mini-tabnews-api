@@ -31,18 +31,18 @@ describe("Fetch Post By User Id(e2e)", () => {
     const decoded = jwt.decode(token);
     const userId = decoded?.sub;
 
-    await request(app.server).post("/post/create").set("Authorization", `Bearer ${token}`).send({
+    await request(app.server).post("/post/create").set("Cookie", `refreshToken=${token}`).send({
       title: "test-01",
       content: "test-test",
       owner_id: userId,
     });
-    await request(app.server).post("/post/create").set("Authorization", `Bearer ${token}`).send({
+    await request(app.server).post("/post/create").set("Cookie", `refreshToken=${token}`).send({
       title: "test-02",
       content: "test-test-test",
       owner_id: userId,
     });
 
-    const { body: postsBody } = await request(app.server).get(`/posts/${userId}`).set("Authorization", `Bearer ${token}`);
+    const { body: postsBody } = await request(app.server).get(`/posts/${userId}`).set("Cookie", `refreshToken=${token}`);
 
     expect(postsBody).toHaveLength(2);
   });

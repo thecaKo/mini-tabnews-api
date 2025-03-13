@@ -31,7 +31,7 @@ describe("delete comment(e2e)", () => {
     const decoded = jwt.decode(token);
     const userId = decoded?.sub;
 
-    const { body: postBody } = await request(app.server).post("/post/create").set("Authorization", `Bearer ${token}`).send({
+    const { body: postBody } = await request(app.server).post("/post/create").set("Cookie", `refreshToken=${token}`).send({
       title: "test-01",
       content: "test-test",
       owner_id: userId,
@@ -39,7 +39,7 @@ describe("delete comment(e2e)", () => {
 
     const { body: commentBody } = await request(app.server)
       .post(`/post/${postBody.post.id}/create-comment`)
-      .set("Authorization", `Bearer ${token}`)
+      .set("Cookie", `refreshToken=${token}`)
       .send({
         ownerId: userId,
         postId: postBody.post.id,
@@ -48,7 +48,7 @@ describe("delete comment(e2e)", () => {
 
     const deleteResponse = await request(app.server)
       .delete(`/post/${postBody.post.id}/delete-comment/${commentBody.id}`)
-      .set("Authorization", `Bearer ${token}`);
+      .set("Cookie", `refreshToken=${token}`);
 
     expect(deleteResponse.statusCode).toBe(200);
   });

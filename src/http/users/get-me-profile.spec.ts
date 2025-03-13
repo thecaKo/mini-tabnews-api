@@ -27,10 +27,10 @@ describe("Get Me (e2e)", () => {
 
     const { token } = authResponse.body;
 
-    const profileResponse = await request(app.server).get("/me").set("Authorization", `Bearer ${token}`).send();
+    const profileResponse = await request(app.server).get("/me").set("Cookie", `refreshToken=${token}`).send();
 
     expect(profileResponse.statusCode).toEqual(200);
-    expect(profileResponse.body.user.user).toEqual(
+    expect(profileResponse.body.user).toEqual(
       expect.objectContaining({
         email: expect.any(String),
       }),

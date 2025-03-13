@@ -31,7 +31,7 @@ describe("Delete post(e2e)", () => {
     const decoded = jwt.decode(token);
     const userId = decoded?.sub;
 
-    const { body: postBody } = await request(app.server).post("/post/create").set("Authorization", `Bearer ${token}`).send({
+    const { body: postBody } = await request(app.server).post("/post/create").set("Cookie", `refreshToken=${token}`).send({
       title: "test-01",
       content: "test-test",
       owner_id: userId,
@@ -39,7 +39,7 @@ describe("Delete post(e2e)", () => {
 
     expect(postBody.post).toHaveProperty("id");
 
-    const deleteResponse = await request(app.server).delete(`/post/delete/${postBody.post.id}`).set("Authorization", `Bearer ${token}`);
+    const deleteResponse = await request(app.server).delete(`/post/delete/${postBody.post.id}`).set("Cookie", `refreshToken=${token}`);
 
     expect(deleteResponse.statusCode).toEqual(204);
   });
@@ -67,7 +67,7 @@ describe("Delete post(e2e)", () => {
     const decoded = jwt.decode(token);
     const userId = decoded?.sub;
 
-    const { body } = await request(app.server).post("/post/create").set("Authorization", `Bearer ${token}`).send({
+    const { body } = await request(app.server).post("/post/create").set("Cookie", `refreshToken=${token}`).send({
       title: "test-01",
       content: "test-test",
       owner_id: userId,
@@ -84,7 +84,7 @@ describe("Delete post(e2e)", () => {
 
     const deleteResponse = await request(app.server)
       .delete(`/post/delete/${body.post.id}`)
-      .set("Authorization", `Bearer ${secondUserToken}`);
+      .set("Cookie", `refreshToken=${secondUserToken}`);
 
     expect(deleteResponse.statusCode).toEqual(401);
   });

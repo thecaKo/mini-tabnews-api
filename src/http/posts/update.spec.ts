@@ -31,7 +31,7 @@ describe("Update post (e2e)", () => {
     const decoded = jwt.decode(token);
     const userId = decoded?.sub;
 
-    const postResponse = await request(app.server).post("/post/create").set("Authorization", `Bearer ${token}`).send({
+    const postResponse = await request(app.server).post("/post/create").set("Cookie", `refreshToken=${token}`).send({
       title: "test-01",
       content: "test-test",
       owner_id: userId,
@@ -41,7 +41,7 @@ describe("Update post (e2e)", () => {
 
     const postId = postResponse.body.post.id;
 
-    const updatedPostResponse = await request(app.server).put(`/post/update/${postId}`).set("Authorization", `Bearer ${token}`).send({
+    const updatedPostResponse = await request(app.server).put(`/post/update/${postId}`).set("Cookie", `refreshToken=${token}`).send({
       title: "updated-post",
       content: "this-really-updated",
     });
