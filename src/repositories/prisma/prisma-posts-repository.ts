@@ -48,4 +48,14 @@ export class PrismaPostRepository implements PostRepository {
 
     return posts;
   }
+
+  async getAllPosts(): Promise<Post[] | null> {
+    const posts = await prisma.post.findMany({ include: { Comment: true, user: true } });
+
+    if (!posts) {
+      return null;
+    }
+
+    return posts;
+  }
 }

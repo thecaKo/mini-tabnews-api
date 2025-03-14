@@ -83,4 +83,11 @@ export class InMemoryPostRepository implements PostRepository {
 
     return posts;
   }
+  async getAllPosts(): Promise<Post[] | null> {
+    if (this.items.length < 1) {
+      return null;
+    }
+
+    return this.items;
+  }
 }

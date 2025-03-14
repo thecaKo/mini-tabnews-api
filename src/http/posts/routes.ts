@@ -5,6 +5,7 @@ import { deletePost } from "./delete";
 import { findById } from "./find-by-id";
 import { fetchManyByUserId } from "./fetch-posts-by-user-id";
 import { update } from "./update";
+import { getAllPosts } from "./get-all-posts";
 
 export async function postsRoutes(app: FastifyInstance) {
   app.post("/post/create", { onRequest: [verifyJWT] }, create);
@@ -16,4 +17,6 @@ export async function postsRoutes(app: FastifyInstance) {
   app.get("/post/:id", { onRequest: verifyJWT }, findById);
 
   app.get("/posts/:id", { onRequest: verifyJWT }, fetchManyByUserId);
+
+  app.get("/posts", getAllPosts);
 }
