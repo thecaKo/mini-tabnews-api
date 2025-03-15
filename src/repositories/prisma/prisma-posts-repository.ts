@@ -58,4 +58,14 @@ export class PrismaPostRepository implements PostRepository {
 
     return posts;
   }
+
+  async findBySlug(slug: string): Promise<Post | null> {
+    const post = await prisma.post.findFirst({ where: { slug: slug }, include: { Comment: true, user: true } });
+
+    if (!post) {
+      return post;
+    }
+
+    return post;
+  }
 }

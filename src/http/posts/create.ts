@@ -15,7 +15,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
 
   const { title, content } = createPostBodySchema.parse(request.body);
 
-  const token = request.cookies.refreshToken; // Supondo que o nome do cookie seja 'jwt'
+  const token = request.cookies.refreshToken;
 
   if (!token) {
     return reply.status(401).send({ message: "Token não fornecido" });

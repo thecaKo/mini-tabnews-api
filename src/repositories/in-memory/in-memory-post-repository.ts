@@ -90,4 +90,13 @@ export class InMemoryPostRepository implements PostRepository {
 
     return this.items;
   }
+  async findBySlug(slug: string): Promise<Post | null> {
+    const index = this.items.findIndex((post) => post.slug === slug);
+
+    if (index === -1) {
+      return null;
+    }
+
+    return this.items[index];
+  }
 }
