@@ -1,5 +1,4 @@
-import { PrismaUserRepository } from "@/repositories/prisma/prisma-users-repository";
-import { GetProfileByUserNameService } from "@/services/get-profile-by-username";
+import { makeGetProfileByUserNameService } from "@/services/factories/make-get-me-profile-service";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
@@ -8,8 +7,7 @@ export async function getProfileStats(request: FastifyRequest, reply: FastifyRep
     user: z.string(),
   });
 
-  const prismaUsersRepository = new PrismaUserRepository();
-  const getProfileService = new GetProfileByUserNameService(prismaUsersRepository);
+  const getProfileService = makeGetProfileByUserNameService();
 
   const { user } = userNameParams.parse(request.params);
 

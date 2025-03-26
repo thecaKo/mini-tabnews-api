@@ -1,12 +1,10 @@
-import { PrismaUserRepository } from "@/repositories/prisma/prisma-users-repository";
-import { GetProfileByUserId } from "@/services/get-profile-by-user-id";
+import { makeGetProfileByUserIdService } from "@/services/factories/make-get-profile-by-userid";
 import { FastifyReply, FastifyRequest } from "fastify";
 
 export async function getProfileByUserId(request: FastifyRequest, reply: FastifyReply) {
   await request.jwtVerify();
 
-  const prismaUsersRepository = new PrismaUserRepository();
-  const getProfileByUserId = new GetProfileByUserId(prismaUsersRepository);
+  const getProfileByUserId = makeGetProfileByUserIdService();
 
   const { user } = await getProfileByUserId.execute({ id: request.user.sub });
 

@@ -1,10 +1,8 @@
-import { PrismaUserRepository } from "@/repositories/prisma/prisma-users-repository";
-import { GetAllUsers } from "@/services/get-all-users";
+import { makeGetAllUserProfile } from "@/services/factories/make-get-all-user-profile";
 import { FastifyReply, FastifyRequest } from "fastify";
 
 export async function getAllUsers(_request: FastifyRequest, reply: FastifyReply) {
-  const prismaUsersRepository = new PrismaUserRepository();
-  const getAllUsersService = new GetAllUsers(prismaUsersRepository);
+  const getAllUsersService = makeGetAllUserProfile();
 
   const { users } = await getAllUsersService.execute();
 
