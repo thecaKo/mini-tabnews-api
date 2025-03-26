@@ -1,4 +1,4 @@
-import { makeGetAllUserProfile } from "@/services/factories/make-get-all-user-profile";
+import { makeGetAllUserProfile } from "@/services/factories/users/make-get-all-user-profile";
 import { FastifyReply, FastifyRequest } from "fastify";
 
 export async function getAllUsers(_request: FastifyRequest, reply: FastifyReply) {

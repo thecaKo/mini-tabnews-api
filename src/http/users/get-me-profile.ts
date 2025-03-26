@@ -1,4 +1,4 @@
-import { makeGetProfileByUserNameService } from "@/services/factories/make-get-me-profile-service";
+import { makeGetProfileByUserNameService } from "@/services/factories/users/make-get-me-profile-service";
 import { FastifyReply, FastifyRequest } from "fastify";
 
 export async function getProfile(request: FastifyRequest, reply: FastifyReply) {

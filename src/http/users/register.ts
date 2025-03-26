@@ -1,7 +1,5 @@
-import { PrismaUserRepository } from "@/repositories/prisma/prisma-users-repository";
 import { UserAlredyExistError } from "@/services/errors/user-alredy-exists-error";
-import { makeRegisterService } from "@/services/factories/make-register-service";
-import { RegisterService } from "@/services/register";
+import { makeRegisterService } from "@/services/factories/users/make-register-service";
 import { FastifyRequest, FastifyReply } from "fastify";
 import { z } from "zod";
 
