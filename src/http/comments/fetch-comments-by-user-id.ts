@@ -12,8 +12,6 @@ export async function fetchCommentsByUserId(request: FastifyRequest, reply: Fast
   const fetchCommentsByUserId = makeFetchCommentByUserIdService();
   const { comment: comments } = await fetchCommentsByUserId.execute({ ownerId: id });
 
-  console.log(comments);
-
   return reply.status(200).send({
     comments,
   });

@@ -1,10 +1,8 @@
-import { PrismaPostRepository } from "@/repositories/prisma/prisma-posts-repository";
 import { FastifyReply, FastifyRequest } from "fastify";
-import { GetAllPosts } from "@/services/fetch-all-posts";
+import { makeFetchAllPostsService } from "@/services/factories/posts/make-fetch-all-posts-service";
 
 export async function getAllPosts(_request: FastifyRequest, reply: FastifyReply) {
-  const prismaPostRepository = new PrismaPostRepository();
-  const getAllPostService = new GetAllPosts(prismaPostRepository);
+  const getAllPostService = makeFetchAllPostsService();
 
   const { posts } = await getAllPostService.execute();
 

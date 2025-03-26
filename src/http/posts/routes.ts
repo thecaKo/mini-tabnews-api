@@ -7,19 +7,28 @@ import { fetchManyByUserId } from "./fetch-posts-by-user-id";
 import { update } from "./update";
 import { getAllPosts } from "./get-all-posts";
 import { getPostBySlug } from "./get-post-by-slug";
+import {
+  createPostSchema,
+  deletePostSchema,
+  getAllPostsSchema,
+  getPostByIdSchema,
+  getPostByOwnerIdSchema,
+  getPostBySlugSchema,
+  updatePostSchema,
+} from "./posts-schema";
 
 export async function postsRoutes(app: FastifyInstance) {
-  app.post("/post/create", { onRequest: [verifyJWT] }, create);
+  app.post("/post/create", { onRequest: [verifyJWT], schema: createPostSchema }, create);
 
-  app.delete("/post/delete/:id", { onRequest: verifyJWT }, deletePost);
+  app.delete("/post/delete/:id", { onRequest: verifyJWT, schema: deletePostSchema }, deletePost);
 
-  app.put("/post/update/:id", { onRequest: verifyJWT }, update);
+  app.put("/post/update/:id", { onRequest: verifyJWT, schema: updatePostSchema }, update);
 
-  app.get("/post/:id", { onRequest: verifyJWT }, findById);
+  app.get("/post/:id", { schema: getPostByIdSchema }, findById);
 
-  app.get("/posts/:id", { onRequest: verifyJWT }, fetchManyByUserId);
+  app.get("/post/owner/:id", { schema: getPostByOwnerIdSchema }, fetchManyByUserId);
 
-  app.get("/posts", getAllPosts);
+  app.get("/posts", { schema: getAllPostsSchema }, getAllPosts);
 
-  app.get("/posts/slug/:slug", getPostBySlug);
+  app.get("/posts/slug/:slug", { schema: getPostBySlugSchema }, getPostBySlug);
 }

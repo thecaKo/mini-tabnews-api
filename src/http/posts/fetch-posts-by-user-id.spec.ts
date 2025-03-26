@@ -42,7 +42,7 @@ describe("Fetch Post By User Id(e2e)", () => {
       owner_id: userId,
     });
 
-    const { body: postsBody } = await request(app.server).get(`/posts/${userId}`).set("Cookie", `refreshToken=${token}`);
+    const { body: postsBody } = await request(app.server).get(`/post/owner/${userId}`).set("Cookie", `refreshToken=${token}`);
 
     expect(postsBody).toHaveLength(2);
   });
