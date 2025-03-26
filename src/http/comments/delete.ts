@@ -1,5 +1,4 @@
-import { PrismaCommentsRepository } from "@/repositories/prisma/prisma-comments-repository";
-import { DeleteComment } from "@/services/delete-comment";
+import { makeDeleteCommentByIdService } from "@/services/factories/comments/make-delete-comment-by-id-service";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
@@ -10,8 +9,7 @@ export async function deleteComment(request: FastifyRequest, reply: FastifyReply
 
   const { id } = deleteCommentParamsSchema.parse(request.params);
 
-  const prismaCommentsRepository = new PrismaCommentsRepository();
-  const deleteCommentService = new DeleteComment(prismaCommentsRepository);
+  const deleteCommentService = makeDeleteCommentByIdService();
 
   await deleteCommentService.execute({
     commentId: id,

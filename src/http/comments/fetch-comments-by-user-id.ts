@@ -1,5 +1,4 @@
-import { PrismaCommentsRepository } from "@/repositories/prisma/prisma-comments-repository";
-import { FetchCommentsByUserIdService } from "@/services/fetch-comments-by-user-id";
+import { makeFetchCommentByUserIdService } from "@/services/factories/comments/make-fetch-comments-by-user-id-service";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
@@ -10,9 +9,7 @@ export async function fetchCommentsByUserId(request: FastifyRequest, reply: Fast
 
   const { id } = userIdParamsBody.parse(request.params);
 
-  const prismaCommentsRepository = new PrismaCommentsRepository();
-  const fetchCommentsByUserId = new FetchCommentsByUserIdService(prismaCommentsRepository);
-
+  const fetchCommentsByUserId = makeFetchCommentByUserIdService();
   const { comment: comments } = await fetchCommentsByUserId.execute({ ownerId: id });
 
   console.log(comments);

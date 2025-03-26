@@ -1,5 +1,4 @@
-import { PrismaCommentsRepository } from "@/repositories/prisma/prisma-comments-repository";
-import { CreateComment } from "@/services/create-comment";
+import { makeCreateCommentService } from "@/services/factories/comments/make-create-comment-service";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
@@ -12,8 +11,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
 
   const { content, postId, ownerId } = createCommentBodySchema.parse(request.body);
 
-  const prismaCommentsRepository = new PrismaCommentsRepository();
-  const createCommentService = new CreateComment(prismaCommentsRepository);
+  const createCommentService = makeCreateCommentService();
 
   const { comment } = await createCommentService.execute({
     ownerId,
