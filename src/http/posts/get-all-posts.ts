@@ -1,6 +1,6 @@
 import { PrismaPostRepository } from "@/repositories/prisma/prisma-posts-repository";
 import { FastifyReply, FastifyRequest } from "fastify";
-import { GetAllPosts } from "@/services/get-all-posts";
+import { GetAllPosts } from "@/services/fetch-all-posts";
 
 export async function getAllPosts(_request: FastifyRequest, reply: FastifyReply) {
   const prismaPostRepository = new PrismaPostRepository();
@@ -8,7 +8,7 @@ export async function getAllPosts(_request: FastifyRequest, reply: FastifyReply)
 
   const { posts } = await getAllPostService.execute();
 
-  const postsWithoutPasswordHash = posts.map((post) => {
+  const postsWithoutPasswordHash = posts.map((post: any) => {
     if (post.user && post.user.password_hash) {
       const { password_hash, ...userWithoutPassword } = post.user;
       post.user = userWithoutPassword;

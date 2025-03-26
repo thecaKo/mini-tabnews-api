@@ -1,5 +1,5 @@
 import { PrismaUserRepository } from "@/repositories/prisma/prisma-users-repository";
-import { GetAllUsers } from "../../get-all-users";
+import { GetAllUsers } from "../../fetch-all-users";
 
 export function makeGetAllUserProfile() {
   const userRepository = new PrismaUserRepository();

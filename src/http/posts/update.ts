@@ -1,5 +1,4 @@
-import { PrismaPostRepository } from "@/repositories/prisma/prisma-posts-repository";
-import { UpdatePostService } from "@/services/update-post-by-id";
+import { makeUpdatePostService } from "@/services/factories/posts/make-update-post-service";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
@@ -13,8 +12,7 @@ export async function update(request: FastifyRequest, reply: FastifyReply) {
     content: z.string(),
   });
 
-  const prismaPostRepository = new PrismaPostRepository();
-  const updatePostService = new UpdatePostService(prismaPostRepository);
+  const updatePostService = makeUpdatePostService();
 
   const { id } = updatePostParamsSchema.parse(request.params);
 

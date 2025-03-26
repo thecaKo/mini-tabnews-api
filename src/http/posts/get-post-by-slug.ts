@@ -1,6 +1,6 @@
 import { PrismaPostRepository } from "@/repositories/prisma/prisma-posts-repository";
 import { FetchPostById } from "@/services/fetch-posts-by-id";
-import { GetPostBySlugService } from "@/services/get-post-by-slug";
+import { GetPostBySlugService } from "@/services/fetch-post-by-slug";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 

@@ -2,7 +2,7 @@ import { FastifyInstance } from "fastify";
 import { verifyJWT } from "../middlewares/verify-jwt";
 import { create } from "./create";
 import { deletePost } from "./delete";
-import { findById } from "./find-by-id";
+import { findById } from "./fetch-by-id";
 import { fetchManyByUserId } from "./fetch-posts-by-user-id";
 import { update } from "./update";
 import { getAllPosts } from "./get-all-posts";

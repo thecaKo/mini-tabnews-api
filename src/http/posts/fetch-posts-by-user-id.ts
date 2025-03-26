@@ -1,5 +1,4 @@
-import { PrismaPostRepository } from "@/repositories/prisma/prisma-posts-repository";
-import { FetchPostsByUserId } from "@/services/fetch-posts-by-user-id";
+import { makeFetchPostByUserIdService } from "@/services/factories/posts/make-fetch-posts-by-userid-service";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
@@ -10,8 +9,7 @@ export async function fetchManyByUserId(request: FastifyRequest, reply: FastifyR
 
   const { id } = fetchManyByUserIdSchema.parse(request.params);
 
-  const prismaPostRepository = new PrismaPostRepository();
-  const fetchManyByUserId = new FetchPostsByUserId(prismaPostRepository);
+  const fetchManyByUserId = makeFetchPostByUserIdService();
 
   const { posts } = await fetchManyByUserId.execute({
     userId: id,

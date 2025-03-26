@@ -1,9 +1,8 @@
-import { PrismaPostRepository } from "@/repositories/prisma/prisma-posts-repository";
-import { CreatePostService } from "@/services/create-post";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 import jwt from "jsonwebtoken";
 import { env } from "@/env";
+import { makeCreatePostService } from "@/services/factories/posts/make-create-posts-service";
 
 export async function create(request: FastifyRequest, reply: FastifyReply) {
   const createPostBodySchema = z.object({
@@ -28,8 +27,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
     return reply.status(401).send({ message: "Token inválido ou expirado" });
   }
 
-  const prismaPostRepository = new PrismaPostRepository();
-  const createPostService = new CreatePostService(prismaPostRepository);
+  const createPostService = makeCreatePostService();
 
   const { post } = await createPostService.execute({ owner_id, content, title });
 

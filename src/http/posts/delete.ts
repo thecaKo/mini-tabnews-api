@@ -1,5 +1,6 @@
 import { PrismaPostRepository } from "@/repositories/prisma/prisma-posts-repository";
 import { DeletePostService } from "@/services/delete-post";
+import { makeDeletePostService } from "@/services/factories/posts/make-delete-post-service";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
@@ -8,8 +9,7 @@ export async function deletePost(request: FastifyRequest, reply: FastifyReply) {
     id: z.string(),
   });
 
-  const prismaPostRepository = new PrismaPostRepository();
-  const deletePostService = new DeletePostService(prismaPostRepository);
+  const deletePostService = makeDeletePostService();
 
   const { id } = deleteParamsSchema.parse(request.params);
 
