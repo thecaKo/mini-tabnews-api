@@ -14,6 +14,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@fastify/swagger": "9.4.2",
+    "@fastify/swagger-ui": "5.2.2",
     "@types/jsonwebtoken": "9.0.9",
     "@types/node": "22.13.8",
     "@types/supertest": "6.0.2",
@@ -34,6 +36,7 @@
     "dotenv": "16.4.7",
     "fastify": "5.2.1",
     "jsonwebtoken": "9.0.2",
-    "zod": "3.24.2"
+    "zod": "3.24.2",
+    "zod-to-json-schema": "3.24.5"
   }
 }

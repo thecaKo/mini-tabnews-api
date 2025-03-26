@@ -14,9 +14,7 @@ export async function getProfileStats(request: FastifyRequest, reply: FastifyRep
   const userProfile = await getProfileService.execute({ username: user });
 
   return reply.status(200).send({
-    user: {
-      ...userProfile,
-      password_hash: undefined,
-    },
+    ...userProfile,
+    password_hash: undefined,
   });
 }

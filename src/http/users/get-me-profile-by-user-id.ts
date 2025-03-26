@@ -9,9 +9,7 @@ export async function getProfileByUserId(request: FastifyRequest, reply: Fastify
   const { user } = await getProfileByUserId.execute({ id: request.user.sub });
 
   return reply.status(200).send({
-    user: {
-      ...user,
-      password_hash: undefined,
-    },
+    ...user,
+    password_hash: undefined,
   });
 }

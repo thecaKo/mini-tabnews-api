@@ -30,7 +30,7 @@ describe("Get Me (e2e)", () => {
     const profileResponse = await request(app.server).get("/me").set("Cookie", `refreshToken=${token}`).send();
 
     expect(profileResponse.statusCode).toEqual(200);
-    expect(profileResponse.body.user).toEqual(
+    expect(profileResponse.body).toEqual(
       expect.objectContaining({
         email: expect.any(String),
       }),
