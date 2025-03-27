@@ -61,5 +61,6 @@ model Comment {
   user     User   @relation(fields: [owner_id], references: [id])
   owner_id String
 
+
   @@map("comments")
 }
